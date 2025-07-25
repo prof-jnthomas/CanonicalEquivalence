@@ -76,8 +76,10 @@ This repository accompanies ongoing research. If you reference this work, please
 
 ## 👤 Author
 
-James N. Thomas
+J.N. Thomas
+
 *Professor of Computer Science*
+
 Whatcom Community College
 
 ---
