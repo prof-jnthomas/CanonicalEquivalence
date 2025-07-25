@@ -10,7 +10,7 @@ The goal of this project is to show that canonical Kripke semantics *recapitulat
 * **Proof system**: Inductive derivability judgment `Γ ⊦ ϕ`
 * **Compactness**: If `Γ ⊦ ⊥`, then some finite `Δ ⊆ Γ` has `Δ ⊦ ⊥`
 * **Constructive completeness**: `∀Δ. Δ ⊆ Γ → Δ ⊦ ϕ` implies `Γ ⊦ ϕ`
-* **Constructive completeness contrapositive**: If `¬(Γ ⊦ ϕ)`, then ∃ finite `Δ ⊆ Γ`such that`¬`such that `¬(Δ ⊦ ϕ)\`
+* **Constructive completeness contrapositive**: If `¬(Γ ⊦ ϕ)`, then ∃ finite `Δ ⊆ Γ`such that `¬(Δ ⊦ ϕ)`
 * **Kripke models (in progress)**: Canonical construction of a Kripke frame from syntactic entailment and demonstration that forcing aligns with `⊦`
 
 The project aims to show that even Kripke semantics—typically viewed as a model-theoretic or semantic tool—can be reconstructed from syntactic, constructive data alone.
