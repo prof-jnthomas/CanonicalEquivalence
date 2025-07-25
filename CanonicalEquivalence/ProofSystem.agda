@@ -4,28 +4,27 @@ open import CanonicalEquivalence.Syntax
 open import CanonicalEquivalence.Helpers
 
 -- Fixities
-infix 5 _⊦_
+infix 5 _⊢_
 infix 7 _↑_
 
-data _⊦_ (Γ : Theory) : Formula → Set where
-  assumption : ∀ {φ}         → Γ φ → Γ ⊦ φ
+data _⊢_ (Γ : Theory) : Formula → Set where
+  assumption : ∀ {φ}         → Γ φ → Γ ⊢ φ
   -- Implication
-  ⟶ⁱ         : ∀ {φ ψ}       → (φ :: Γ) ⊦ ψ → Γ ⊦ (φ ⟶ ψ)
-  ⟶ᵉ         : ∀ {φ ψ}       → Γ ⊦ (φ ⟶ ψ) → Γ ⊦ φ → Γ ⊦ ψ
+  ⟶ⁱ         : ∀ {φ ψ}       → (φ :: Γ) ⊢ ψ → Γ ⊢ (φ ⟶ ψ)
+  ⟶ᵉ         : ∀ {φ ψ}       → Γ ⊢ (φ ⟶ ψ) → Γ ⊢ φ → Γ ⊢ ψ
   -- Disjunction
-  ∨i¹        : ∀ {φ ψ}       → Γ ⊦ φ → Γ ⊦ (φ ∨ ψ)
-  ∨i²        : ∀ {φ ψ}       → Γ ⊦ ψ → Γ ⊦ (φ ∨ ψ)
-  ∨ᵉ         : ∀ (φ ψ χ : Formula) → Γ ⊦ (φ ∨ ψ) → (φ :: Γ) ⊦ χ → (ψ :: Γ) ⊦ χ
-                             → Γ ⊦ χ
+  ∨i¹        : ∀ {φ ψ}       → Γ ⊢ φ → Γ ⊢ (φ ∨ ψ)
+  ∨i²        : ∀ {φ ψ}       → Γ ⊢ ψ → Γ ⊢ (φ ∨ ψ)
+  ∨ᵉ         : ∀ (φ ψ χ : Formula) → Γ ⊢ (φ ∨ ψ) → (φ :: Γ) ⊢ χ → (ψ :: Γ) ⊢ χ → Γ ⊢ χ
   -- Conjunction
-  ∧ⁱ         : ∀ {φ ψ}       → Γ ⊦ φ → Γ ⊦ ψ → Γ ⊦ (φ ∧ ψ)
-  ∧e¹        : ∀ {φ ψ}       → Γ ⊦ (φ ∧ ψ) → Γ ⊦ φ
-  ∧e²        : ∀ {φ ψ}       → Γ ⊦ (φ ∧ ψ) → Γ ⊦ ψ
+  ∧ⁱ         : ∀ {φ ψ}       → Γ ⊢ φ → Γ ⊢ ψ → Γ ⊢ (φ ∧ ψ)
+  ∧e¹        : ∀ {φ ψ}       → Γ ⊢ (φ ∧ ψ) → Γ ⊢ φ
+  ∧e²        : ∀ {φ ψ}       → Γ ⊢ (φ ∧ ψ) → Γ ⊢ ψ
   -- Bottom
-  𝟘ᵉ         : ∀ {φ}         → Γ ⊦ 𝟘 → Γ ⊦ φ
+  𝟘ᵉ         : ∀ {φ}         → Γ ⊢ 𝟘 → Γ ⊢ φ
 
 -- Lifting derivations along subset inclusions
-_↑_ : ∀ {Γ Δ φ} → Γ ⊆ Δ → Γ ⊦ φ → Δ ⊦ φ
+_↑_ : ∀ {Γ Δ φ} → Γ ⊆ Δ → Γ ⊢ φ → Δ ⊢ φ
 
 _↑_ {Γ} {Δ} {φ} Γ⊆Δ (assumption pf) = assumption (Γ⊆Δ pf)
 

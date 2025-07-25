@@ -17,7 +17,7 @@ open import CanonicalEquivalence.ProofSystem
 -- More generally, for finitary derivability
 -- Γ ⊢ φ → ∃Δ((Δ ⊆ Γ) ∧ (Δ ⊢ φ))
 
-finitary-derivability : ∀ {Γ φ} → Γ ⊦ φ → (∃ λ Δ → Δ ⊆ Γ × Δ ⊦ φ)
+finitary-derivability : ∀ {Γ φ} → Γ ⊢ φ → (∃ λ Δ → Δ ⊆ Γ × Δ ⊢ φ)
 
 -- Base case
 finitary-derivability {Γ} {φ} (assumption p) = ⟪ Δ , ⟪ Δ⊆Γ , assumption φ∈Δ ⟫ ⟫
@@ -31,7 +31,7 @@ finitary-derivability {Γ} {φ} (assumption p) = ⟪ Δ , ⟪ Δ⊆Γ , assumpti
     Δ⊆Γ : Δ ⊆ Γ
     Δ⊆Γ (inj₂ refl) = p
 
-    baseCase : (Δ ⊆ Γ × Δ ⊦ φ)
+    baseCase : (Δ ⊆ Γ × Δ ⊢ φ)
     baseCase = ⟪ Δ⊆Γ , assumption φ∈Δ ⟫
 
 finitary-derivability {Γ} {φ₁ ⟶ φ₂} (⟶ⁱ x) =
@@ -120,7 +120,7 @@ finitary-derivability {Γ} {χ} (∨ᵉ φ₁ φ₂ .χ x₁ x₂ x₃) =
     subIncl₃ : Δ₃ ⊆ (φ₂ :: Δ)
     subIncl₃ {φ} ψ∈Δ₃ = [ (λ ψ∈Δ₃′ → inj₁ (Δ₃′⊆Δ ψ∈Δ₃′)) , (λ refl → inj₂ refl) ]′ (Δ₃ᵣ ψ∈Δ₃)
 
-    pf : Δ ⊦ χ
+    pf : Δ ⊢ χ
     pf = ∨ᵉ φ₁ φ₂ χ (Δ₁⊆Δ ↑ pf₁) (subIncl₂ ↑ pf₂) (subIncl₃ ↑ pf₃)
 
   in ⟪ Δ , ⟪ Δ⊆Γ , pf ⟫ ⟫
@@ -162,13 +162,13 @@ finitary-derivability {Γ} {φ} (𝟘ᵉ x) =
     pf = 𝟘ᵉ pf₁
   in ⟪ Δ , ⟪ Δ⊆Γ , pf ⟫ ⟫
 
-compactness-of-inconsistency : ∀ {Γ} → Γ ⊦ 𝟘 → (∃ λ Δ → Δ ⊆ Γ × Δ ⊦ 𝟘)
+compactness-of-inconsistency : ∀ {Γ} → Γ ⊢ 𝟘 → (∃ λ Δ → Δ ⊆ Γ × Δ ⊢ 𝟘)
 compactness-of-inconsistency = finitary-derivability
 
-compact-consistency : ∀ {Γ} → (∀ Δ → Δ ⊆ Γ → ¬ (Δ ⊦ 𝟘)) → ¬ (Γ ⊦ 𝟘)
+compact-consistency : ∀ {Γ} → (∀ Δ → Δ ⊆ Γ → ¬ (Δ ⊢ 𝟘)) → ¬ (Γ ⊢ 𝟘)
 
-compact-consistency {Γ} 𝒞Γ Γ⊦𝟘 =
+compact-consistency {Γ} 𝒞Γ Γ⊢𝟘 =
   let
-    ⟪ Δ , ⟪ Δ⊆Γ , Δ⊦𝟘 ⟫ ⟫ = finitary-derivability Γ⊦𝟘
-    ¬Δ⊦𝟘 = (𝒞Γ Δ) Δ⊆Γ
-  in ¬Δ⊦𝟘 Δ⊦𝟘
+    ⟪ Δ , ⟪ Δ⊆Γ , Δ⊢𝟘 ⟫ ⟫ = finitary-derivability Γ⊢𝟘
+    ¬Δ⊢𝟘 = (𝒞Γ Δ) Δ⊆Γ
+  in ¬Δ⊢𝟘 Δ⊢𝟘
