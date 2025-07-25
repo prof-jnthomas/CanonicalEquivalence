@@ -1,2 +1,12 @@
 *.agdai
+*.lagda.out
+*.lagda.pdf
+*.swp
+*.swo
+.DS_Store
+*.o
+*.hi
+*.exe
+.vscode/
+_build/**
 MAlonzo/**
