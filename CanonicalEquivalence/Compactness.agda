@@ -34,7 +34,7 @@ finitary-derivability {Γ} {φ} (assumption p) = ⟪ Δ , ⟪ Δ⊆Γ , assumpti
     baseCase : (Δ ⊆ Γ × Δ ⊢ φ)
     baseCase = ⟪ Δ⊆Γ , assumption φ∈Δ ⟫
 
-finitary-derivability {Γ} {φ₁ ⟶ φ₂} (⟶ⁱ x) =
+finitary-derivability {Γ} {φ₁ ⊃ φ₂} (⊃ⁱ x) =
   let
     ⟪ Δ , ⟪ Δ⊆Γ₁ , pf₁ ⟫ ⟫ = finitary-derivability x
     Δ′ = Δ ∩ (λ ψ → ψ ≡ φ₁) ᶜ
@@ -45,11 +45,11 @@ finitary-derivability {Γ} {φ₁ ⟶ φ₂} (⟶ⁱ x) =
     subIncl : Δ ⊆ (φ₁ :: Δ′)
     subIncl = subset-restoration {Δ = Δ} {φ = φ₁}
 
-    pf = ⟶ⁱ (subIncl ↑ pf₁)
+    pf = ⊃ⁱ (subIncl ↑ pf₁)
 
   in ⟪ Δ′ , ⟪ Δ′⊆Γ , pf ⟫ ⟫
 
-finitary-derivability {Γ} {φ₂} (⟶ᵉ x₁ x₂) =
+finitary-derivability {Γ} {φ₂} (⊃ᵉ x₁ x₂) =
   let
     ⟪ Δ₁ , ⟪ Δ⊆Γ₁ , pf₁ ⟫ ⟫ = finitary-derivability x₁
     ⟪ Δ₂ , ⟪ Δ⊆Γ₂ , pf₂ ⟫ ⟫ = finitary-derivability x₂
@@ -64,7 +64,7 @@ finitary-derivability {Γ} {φ₂} (⟶ᵉ x₁ x₂) =
     Δ⊆Γ : Δ ⊆ Γ
     Δ⊆Γ {φ} φ∈Δ = [ (λ φ∈Δ₁ → Δ⊆Γ₁ φ∈Δ₁) , (λ φ∈Δ₂ → Δ⊆Γ₂ φ∈Δ₂) ]′ φ∈Δ
 
-    pf = ⟶ᵉ (Δ₁⊆Δ ↑ pf₁) (Δ₂⊆Δ ↑ pf₂)
+    pf = ⊃ᵉ (Δ₁⊆Δ ↑ pf₁) (Δ₂⊆Δ ↑ pf₂)
   in ⟪ Δ , ⟪ Δ⊆Γ , pf ⟫ ⟫
 
 finitary-derivability {Γ} {φ₁ ∨ φ₂} (∨i¹ x) =
